@@ -23,6 +23,22 @@ import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
 
+/*
+  TODO
+  - remove empty methods
+  - move methods invocations to buildFoldRegions (+ more filters)
+  - move methods declaration to utils class
+  - ignore final and annotations
+  - add style settings (kotlin, java, scala)
+
+ */
+// java:
+//     boolean validator(String t)
+// scala:
+//     validator: (t: String) => boolean
+//     validator: (String) => boolean
+// kotlin:
+//     validator: (String) -> String
 public class SimpleFoldingBuilder extends FoldingBuilderEx {
 
     private void testowa(String a1, Function<String, String> fun1, Predicate<String> pred1, String a2) {
