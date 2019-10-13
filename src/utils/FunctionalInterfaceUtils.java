@@ -11,11 +11,13 @@ public class FunctionalInterfaceUtils {
                 .map(e -> (PsiTypeElementImpl) e)
                 .map(PsiTypeElementImpl::getInnermostComponentReferenceElement)
                 .map(PsiJavaCodeReferenceElement::getQualifiedName)
+                // TODO resolve class in type
                 .map(qualifiedName -> JavaPsiFacade.getInstance(parameter.getProject()).findClass(qualifiedName, parameter.getType().getResolveScope()))
                 .map(PsiModifierListOwner::getAnnotations)
                 .toStream()
                 .flatMap(Stream::of)
                 .map(PsiElement::getText)
+                // TODO do something better than string comparison
                 .exists(e -> e.equals("@java.lang.FunctionalInterface"));
     }
 }

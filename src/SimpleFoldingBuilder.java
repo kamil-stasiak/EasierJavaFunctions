@@ -11,6 +11,7 @@ import utils.FunctionalInterfaceUtils;
 
 public class SimpleFoldingBuilder extends FoldingBuilderEx {
 
+    // TODO move to enum, add to settings
     private String paramToPresentableText(FunctionalStyleParameter param) {
         String params = param.getParameters()
                 .map(p -> p.getType() + " " + p.getName())

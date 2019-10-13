@@ -20,6 +20,7 @@ public class FunctionalStyleParameter {
     private PsiParameter psiParameter;
 
     public static Option<FunctionalStyleParameter> of(PsiParameter psiParameter) {
+        // TODO ugly code :( refactor needed
         String name = psiParameter.getName();
         if (isNull(name)) {
             return Option.none();
@@ -31,6 +32,7 @@ public class FunctionalStyleParameter {
                 .map(PsiTypeElement::getType)
                 .get();
 
+        // TODO refactor!
         GenericResolver genericResolver = new GenericResolver(type);
         List<OriginalParameter> paramsList = genericResolver.getParameterList();
         if (isNull(paramsList)) {

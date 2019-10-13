@@ -6,10 +6,10 @@ import com.intellij.psi.util.PsiUtil;
 import io.vavr.collection.List;
 import io.vavr.collection.Stream;
 import utils.GenericsUtils;
-import utils.ParametersUtils;
 
 import java.util.Map;
 
+// TODO refactor
 public class GenericResolver {
 
     private final Map<String, String> genericsMap;
@@ -20,10 +20,6 @@ public class GenericResolver {
         this.genericsMap = GenericsUtils.getGenericMap(type);
         this.psiClass = PsiUtil.resolveClassInType(type);
         this.abstractMethod = ClassUtil.getAnyAbstractMethod(psiClass);
-    }
-
-    public String getParamsAsString() {
-        return ParametersUtils.getParamsAsString(genericsMap, abstractMethod);
     }
 
     public List<OriginalParameter> getParameterList() {
