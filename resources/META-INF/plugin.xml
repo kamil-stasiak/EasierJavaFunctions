@@ -19,7 +19,7 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
-    <lang.foldingBuilder language="JAVA" implementationClass="SimpleFoldingBuilder"/>
+    <lang.foldingBuilder language="JAVA" implementationClass="me.stasiak.SimpleFoldingBuilder"/>
   </extensions>
 
   <actions>

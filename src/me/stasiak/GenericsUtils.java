@@ -1,4 +1,4 @@
-package utils;
+package me.stasiak;
 
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.PsiClassReferenceType;
@@ -8,8 +8,8 @@ import java.util.AbstractMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class GenericsUtils {
-    public static Map<String, String> getGenericMap(PsiType type) {
+class GenericsUtils {
+    static Map<String, String> getGenericMap(PsiType type) {
         return Option.of(type)
                 .map(psiType -> (PsiClassReferenceType) psiType)
                 .map(PsiClassReferenceType::resolveGenerics)

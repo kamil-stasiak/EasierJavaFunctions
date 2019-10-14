@@ -1,7 +1,7 @@
 #### TODO
   - remove empty methods
   - move methods invocations to buildFoldRegions (+ more filters)
-  - move methods declaration to utils class
+  - move methods declaration to me.stasiak.utils class
   - ignore final and annotations
   - add style settings (kotlin, java, scala)
 

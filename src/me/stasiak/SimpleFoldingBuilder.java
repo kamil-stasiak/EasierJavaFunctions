@@ -1,3 +1,5 @@
+package me.stasiak;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilderEx;
 import com.intellij.lang.folding.FoldingDescriptor;
@@ -7,27 +9,19 @@ import com.intellij.psi.util.PsiTreeUtil;
 import io.vavr.collection.Stream;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import utils.FunctionalInterfaceUtils;
 
-public class SimpleFoldingBuilder extends FoldingBuilderEx {
+import static me.stasiak.FunctionStyle.SCALA;
+import static me.stasiak.ParametersUtils.getTextRange;
 
-    // TODO move to enum, add to settings
-    private String paramToPresentableText(FunctionalStyleParameter param) {
-        String params = param.getParameters()
-                .map(p -> p.getType() + " " + p.getName())
-                .intersperse(", ")
-                .fold("", String::concat);
-        return param.getReturnType() + " " + param.getName() + "(" + params + ")";
-    }
+class SimpleFoldingBuilder extends FoldingBuilderEx {
 
     @NotNull
     @Override
     public FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
         return Stream.ofAll(PsiTreeUtil.findChildrenOfType(root, PsiParameter.class))
                 .filter(FunctionalInterfaceUtils::isFunctionalInterface)
-                .flatMap(FunctionalStyleParameter::of)
-                // TODO add TextRange
-                .map(param -> new ParameterFoldingDescriptor(param.getPsiParameter(), paramToPresentableText(param)))
+                .flatMap(psiParameter -> FoldingUtils.parameterToDescriptorInput(psiParameter, SCALA.getFunction()))
+                .map(tuple -> new ParameterFoldingDescriptor(tuple._1, tuple._2, getTextRange(tuple._2)))
                 .toJavaArray(ParameterFoldingDescriptor.class);
     }
 
